@@ -1,0 +1,37 @@
+{% extends 'polls/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Poll</title>
+</head>
+<body>
+    <h1>Create a New Poll</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Render the form -->
+        <button type="submit">Submit</button>  <!-- Submit button -->
+    </form>
+    <a href="{% url 'homepage' %}">Back to Home</a>  <!-- Link to go back to the homepage -->
+</body>
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Poll</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to your CSS file -->
+</head>
+
+{% block content %}
+<h1>Create a New Poll</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}  <!-- Display non-field errors -->
+    {{ form.as_p }}  
+    <button type="submit">Submit</button>  
+</form>
+<a href="{% url 'homepage' %}">Back to Home</a>  <!-- Link to go back to the homepage -->
+{% endblock %}
