@@ -1,11 +1,12 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404  # Ensure you import 'get_object_or_404'
-from .forms import PollForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from .forms import PollForm, UserRegistrationForm, UserLoginForm
 from .models import Poll, Choice
 
 def homepage(request):
     return render(request, 'polls/homepage.html')  # Updated path
-
 
 def create_poll(request):
     if request.method == 'POST':
@@ -33,3 +34,34 @@ def poll_results(request, poll_id):
         'votes': [choice.votes for choice in choices],
     }
     return JsonResponse(results)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Automatically log in the user after registration
+            return redirect('homepage')  # Redirect to homepage or any other page
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'polls/register.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('homepage')  # Redirect to homepage or any other page
+            else:
+                form.add_error(None, "Invalid username or password")
+    else:
+        form = UserLoginForm()
+    return render(request, 'polls/login.html', {'form': form})
+
+def user_logout(request):
+    logout(request)
+    return redirect('homepage')  # Redirect to homepage after logging out

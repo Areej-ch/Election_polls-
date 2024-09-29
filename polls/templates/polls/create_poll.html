@@ -8,11 +8,18 @@
     {% csrf_token %}
     <div class="form-group">
         {{ form.non_field_errors }}  <!-- Display non-field errors -->
-        {{ form.as_p }}  <!-- Render the form -->
-        <button type="submit" class="btn btn-success">Submit</button>  <!-- Submit button -->
+        {{ form.title.label_tag }}  <!-- Label for title -->
+        {{ form.title|add_class:"form-control" }}  <!-- Render title field -->
+        {{ form.poll_type.label_tag }}  <!-- Label for poll type -->
+        {{ form.poll_type|add_class:"form-control" }}  <!-- Render poll type field -->
+        {{ form.question.label_tag }}  <!-- Label for question -->
+        {{ form.question|add_class:"form-control" }}  <!-- Render question field -->
+        {{ form.options.label_tag }}  <!-- Label for options -->
+        {{ form.options|add_class:"form-control" }}  <!-- Render options field -->
+        <button type="submit" class="btn btn-success mt-3">Submit</button>  <!-- Submit button -->
     </div>
 </form>
-<div class="text-center">
-    <a href="{% url 'homepage' %}">Back to Home</a>
+<div class="text-center mt-3">
+    <a href="{% url 'homepage' %}" class="btn btn-secondary">Back to Home</a>
 </div>
 {% endblock %}
