@@ -1,0 +1,31 @@
+{% extends 'polls/base.html' %}
+
+{% block title %}Poll Detail{% endblock %}
+
+{% block content %}
+<div class="poll-details">
+    <h2 class="text-center">{{ poll.title }}</h2>
+    <p class="text-center">{{ poll.question }}</p>
+
+    {% if poll.poll_type == 'multiple_choice' %}
+        <h3>Choices:</h3>
+        <ul class="list-group">
+            {% for choice in poll.choice_set.all %}
+                <li class="list-group-item">{{ choice.choice_text }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<div class="poll-results mt-4">
+    <h3>Live Results</h3>
+    <ul class="list-group">
+        {% for choice in poll.choice_set.all %}
+            <li class="list-group-item">{{ choice.choice_text }}: {{ choice.votes }} votes</li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="text-center mt-4">
+    <a href="{% url 'homepage' %}" class="btn btn-secondary">Back to Home</a>
+</div>
+{% endblock %}

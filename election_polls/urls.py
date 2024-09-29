@@ -3,5 +3,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('polls.urls')),  # Ensure this is correct
+    path('', include('polls.urls')),  # This will redirect the root URL to your 'polls' app
 ]

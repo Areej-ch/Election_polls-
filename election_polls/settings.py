@@ -59,8 +59,8 @@ ROOT_URLCONF = "election_polls.urls"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Add this to include a global templates folder
-        'APP_DIRS': True,  # Ensure app-specific templates can be found
+        'DIRS': [],
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -71,6 +71,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = "election_polls.wsgi.application"
 

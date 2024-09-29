@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Poll, Choice  # Ensure you are importing the correct models
+from .models import Poll
 
-admin.site.register(Poll)
-admin.site.register(Choice)
+class PollAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Poll, PollAdmin)

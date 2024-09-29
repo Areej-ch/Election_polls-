@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Polling App{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'polls/styles.css' %}">
-    <title>{% block title %}Election Polling App{% endblock %}</title>
-    <link rel="icon" href="{% static 'polls/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Election Polling App</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'homepage' %}">Home</a></li>
-                <li><a href="{% url 'create_poll' %}">Create Poll</a></li>
-            </ul>
-        </nav>
+    <header class="bg-success text-white text-center p-3">
+        <h1>Polling App</h1>
     </header>
-
-    <div class="content">
-        {% block content %}
-        {% endblock %}
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Election Polling App</p>
+    <main class="container mt-4">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="bg-light text-center p-3 mt-4">
+        <p>&copy; 2024 Polling App</p>
     </footer>
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
